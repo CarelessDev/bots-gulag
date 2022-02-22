@@ -4,6 +4,8 @@ import { ActivityOptions, Client, Message } from "discord.js";
 
 import chalk from "chalk";
 
+const RussianChars = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+
 export const slaves: Parameters<typeof buildSlave>[] = [
     [
         "Skittle 姉ちゃん",
@@ -21,7 +23,13 @@ export const slaves: Parameters<typeof buildSlave>[] = [
             name: "Comrade",
         },
         async (msg: Message) => {
-            console.log(`Uncertified ${msg.content}`);
+            if (
+                msg.content
+                    .split("")
+                    .some((char) => RussianChars.includes(char))
+            ) {
+                msg.reply("сука блять");
+            }
         },
     ],
     [
