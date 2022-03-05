@@ -67,7 +67,7 @@ export function buildSlave(
     client.on("ready", (cli) => {
         console.log(chalk.green(`Slave ${name} is ready as ${cli.user.tag}!`));
         if (onMessage) {
-            cli.on("message", async (msg) => {
+            cli.on("messageCreate", async (msg) => {
                 await onMessage(msg).catch((err) => {
                     console.log(chalk.red(`${name} just error blyat! ${err}`));
                 });
