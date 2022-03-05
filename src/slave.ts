@@ -50,6 +50,8 @@ export const slaves: Parameters<typeof buildSlave>[] = [
     ],
 ];
 
+export const clients = slaves.map((slave) => buildSlave(...slave));
+
 export function buildSlave(
     name: string,
     token: string | undefined,

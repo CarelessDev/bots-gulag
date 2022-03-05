@@ -9,7 +9,7 @@ import { Client } from "discord.js";
 import chalk from "chalk";
 
 import { MaoCommander } from "./commands";
-import { buildSlave, slaves } from "./slave";
+import { clients } from "./slave";
 
 const MaoClient = new Client(CocoaOptions);
 
@@ -36,11 +36,6 @@ MaoClient.on("ready", (cli) => {
 });
 
 MaoClient.login(process.env.MAO_TOKEN);
-
-const clients: Array<Client | undefined> = [];
-for (const slave of slaves) {
-    clients.push(buildSlave(...slave));
-}
 
 // * Console Zone
 setConsoleEvent((cmd: string) => {
