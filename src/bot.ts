@@ -1,6 +1,6 @@
-import { setConsoleEvent } from "cocoa-discord-utils";
-import { SlashCenter } from "cocoa-discord-utils/slash";
-import { CocoaIntent } from "cocoa-discord-utils/template";
+import { setConsoleEvent } from "cocoa-discord";
+import { SlashCenter } from "cocoa-discord/slash";
+import { CocoaIntent } from "cocoa-discord/template";
 
 import { ActivityType, Client } from "discord.js";
 
@@ -10,10 +10,10 @@ import { MaoCommander } from "./commands/index.js";
 import { environment } from "./environment.js";
 import { clients } from "./slave.js";
 
-const MaoClient = new Client(new CocoaIntent().useGuildSlash());
+const MaoClient = new Client(new CocoaIntent().useGuild());
 
 const center = new SlashCenter(MaoClient, "Global");
-center.addCogs(new MaoCommander(MaoClient));
+center.addModules(new MaoCommander(MaoClient));
 center.validateCommands();
 
 MaoClient.on("ready", (cli) => {

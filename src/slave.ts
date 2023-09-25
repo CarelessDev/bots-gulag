@@ -1,4 +1,4 @@
-import { CocoaIntent } from "cocoa-discord-utils/template";
+import { CocoaIntent } from "cocoa-discord/template";
 
 import { ActivityOptions, ActivityType, Client, Message } from "discord.js";
 
@@ -63,7 +63,7 @@ export function buildSlave(
   }
 
   const client = new Client(
-    new CocoaIntent().useGuildSlash().useGuildMessage().useReadMessage(),
+    new CocoaIntent().useGuild().useGuildMessage().useReadMessage(),
   );
   client.on("ready", (cli) => {
     console.log(chalk.green(`Slave ${name} is ready as ${cli.user.tag}!`));

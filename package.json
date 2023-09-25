@@ -1,6 +1,6 @@
 {
   "name": "bots-gulag",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Bots",
   "repository": "https://github.com/CarelessDev/bots-gulag",
   "type": "module",
@@ -8,24 +8,25 @@
   "scripts": {
     "start": "bun run src/bot.ts",
     "format": "eslint . --fix",
-    "lint": "eslint . --max-warnings=0"
+    "lint": "eslint . --max-warnings=0",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "chalk": "5.3.0",
-    "cocoa-discord-utils": "2.3.0",
+    "cocoa-discord": "3.1.0",
     "discord.js": "14.13.0",
     "zod": "3.22.2"
   },
   "devDependencies": {
     "@leomotors/config": "0.11.0",
     "@trivago/prettier-plugin-sort-imports": "4.2.0",
-    "@typescript-eslint/eslint-plugin": "6.6.0",
-    "@typescript-eslint/parser": "6.6.0",
-    "eslint": "8.49.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-sort-destructure-keys": "^1.5.0",
+    "@typescript-eslint/eslint-plugin": "6.7.2",
+    "@typescript-eslint/parser": "6.7.2",
+    "eslint": "8.50.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-import": "2.28.1",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-sort-destructure-keys": "1.5.0",
     "prettier": "3.0.3",
     "typescript": "5.2.2"
   }

@@ -1,10 +1,10 @@
-import { EmbedStyle } from "cocoa-discord-utils";
+import { EmbedStyle } from "cocoa-discord";
 import {
-  CogSlashClass,
   Param,
   SlashCommand,
-} from "cocoa-discord-utils/slash/class";
-import { getStatusFields } from "cocoa-discord-utils/template";
+  SlashModuleClass,
+} from "cocoa-discord/slash/class";
+import { getStatusFields } from "cocoa-discord/template";
 
 import { Client } from "discord.js";
 
@@ -16,7 +16,7 @@ const style = new EmbedStyle({
   footer: { text: "天上太阳红呀红彤彤哎 ❤️❤️❤️" },
 });
 
-export class MaoCommander extends CogSlashClass {
+export class MaoCommander extends SlashModuleClass {
   private readonly client: Client;
 
   constructor(client: Client) {
@@ -32,7 +32,7 @@ export class MaoCommander extends CogSlashClass {
     const emb = style
       .use(ctx)
       .setTitle("Gulag's Status")
-      .addField({
+      .addFields({
         name: "Bots Running",
         value: `${slaves.length + 1}`,
         inline: false,
