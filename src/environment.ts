@@ -6,6 +6,10 @@ const environmentSchema = z.object({
   VLADIMIR: z.string().min(10),
   WESSUWAN: z.string().min(10),
   CAPPUCHINO: z.string().min(10),
+  EMU: z.string().min(10),
+  EMU_TARGET: z.string().min(10),
+  EMU_GUILD: z.string().min(10),
+  EMU_STICKER: z.string().min(10),
 });
 
 export const environment = environmentSchema.parse(process.env);
