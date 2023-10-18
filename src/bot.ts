@@ -6,6 +6,7 @@ import { ActivityType, Client } from "discord.js";
 
 import chalk from "chalk";
 
+import { Emu } from "./commands/emu.js";
 import { MaoCommander } from "./commands/index.js";
 import { environment } from "./environment.js";
 import { clients } from "./slave.js";
@@ -13,7 +14,7 @@ import { clients } from "./slave.js";
 const MaoClient = new Client(new CocoaIntent().useGuild());
 
 const center = new SlashCenter(MaoClient, "Global");
-center.addModules(new MaoCommander(MaoClient));
+center.addModules(new MaoCommander(MaoClient), new Emu());
 center.validateCommands();
 
 MaoClient.on("ready", (cli) => {
