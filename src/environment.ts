@@ -10,6 +10,7 @@ const environmentSchema = z.object({
   EMU_TARGET: z.string().min(10),
   EMU_GUILD: z.string().min(10),
   EMU_STICKER: z.string().min(10),
+  EMU_CHANCE: z.number().min(0).max(100).default(1),
 });
 
 export const environment = environmentSchema.parse(process.env);

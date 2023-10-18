@@ -4,6 +4,7 @@ import { ActivityOptions, ActivityType, Client, Message } from "discord.js";
 
 import chalk from "chalk";
 
+import { getEmu } from "./emuChance.js";
 import { environment } from "./environment.js";
 
 const RussianChars = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -67,7 +68,7 @@ export const slaves: Parameters<typeof buildSlave>[] = [
     async (msg: Message) => {
       if (msg.author.bot || msg.author.id !== environment.EMU_TARGET) return;
 
-      if (Math.random() < 0.01) {
+      if (Math.random() < getEmu() / 100) {
         const guild =
           msg.client.guilds.cache.get(environment.EMU_GUILD) ??
           (await msg.client.guilds.fetch(environment.EMU_GUILD));
