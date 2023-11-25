@@ -100,20 +100,21 @@ export const slaves: Parameters<typeof buildSlave>[] = [
         )
           return;
 
-        const reference = await msg.fetchReference();
-
-        if (!reference) return;
-
-        const sticker = await getSticker(msg.guild, environment.SKILLISSUE);
-
-        await reference.reply({
-          stickers: [sticker],
-        });
-
-        await msg.delete().catch(() => {
+        msg.delete().catch(() => {
           console.log(
             chalk.red(`Failed to delete skill issue request message`),
           );
+        });
+
+        const [reference, sticker] = await Promise.all([
+          msg.fetchReference(),
+          getSticker(msg.guild, environment.SKILLISSUE),
+        ]);
+
+        if (!reference) return;
+
+        await reference.reply({
+          stickers: [sticker],
         });
       }
     },
