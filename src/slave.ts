@@ -1,6 +1,12 @@
 import { CocoaIntent } from "cocoa-discord/template";
 
-import { ActivityOptions, ActivityType, Client, Message } from "discord.js";
+import {
+  ActivityOptions,
+  ActivityType,
+  Client,
+  Guild,
+  Message,
+} from "discord.js";
 
 import chalk from "chalk";
 
@@ -59,31 +65,68 @@ export const slaves: Parameters<typeof buildSlave>[] = [
   [
     "鳳えむ",
     environment.EMU,
-    new CocoaIntent().useGuild().useGuildMessage().useReadMessage(),
+    new CocoaIntent().useGuild().useGuildMessage(),
     {
       type: ActivityType.Streaming,
       name: "Asahina Senpai, Wonderhoy!",
       url: "https://www.youtube.com/watch?v=2p1R7btCf_Q&t=32",
     },
     async (msg: Message) => {
-      if (msg.author.bot || msg.author.id !== environment.EMU_TARGET) return;
+      if (msg.author.bot) return;
 
-      if (Math.random() < getEmu() / 100) {
-        const guild =
-          msg.client.guilds.cache.get(environment.EMU_GUILD) ??
-          (await msg.client.guilds.fetch(environment.EMU_GUILD));
-
-        const sticker =
-          guild.stickers.cache.get(environment.EMU_STICKER) ??
-          (await guild.stickers.fetch(environment.EMU_STICKER));
+      // Leak IP
+      if (
+        msg.author.id === environment.EMU_TARGET &&
+        msg.guild?.id === environment.EMU_GUILD &&
+        Math.random() < getEmu() / 100
+      ) {
+        const sticker = await getSticker(msg.guild, environment.EMU_STICKER);
 
         await msg.reply({
           stickers: [sticker],
         });
       }
+
+      // Skill Issue
+      if (
+        msg.guild?.id === environment.EMU_GUILD &&
+        msg.mentions.has(msg.client.user)
+      ) {
+        if (
+          !msg.content
+            .toLowerCase()
+            .replaceAll(/\s/g, "")
+            .includes("skillissue")
+        )
+          return;
+
+        const reference = await msg.fetchReference();
+
+        if (!reference) return;
+
+        const sticker = await getSticker(msg.guild, environment.SKILLISSUE);
+
+        await reference.reply({
+          stickers: [sticker],
+        });
+
+        await msg.delete().catch(() => {
+          console.log(
+            chalk.red(`Failed to delete skill issue request message`),
+          );
+        });
+      }
     },
   ],
 ];
+
+async function getSticker(guild: Guild, stickerId: string) {
+  const sticker =
+    guild.stickers.cache.get(stickerId) ??
+    (await guild.stickers.fetch(stickerId));
+
+  return sticker;
+}
 
 export const clients = slaves.map((slave) => buildSlave(...slave));
 
