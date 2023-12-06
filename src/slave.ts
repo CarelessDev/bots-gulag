@@ -1,16 +1,9 @@
 import { CocoaIntent } from "cocoa-discord/template";
 
-import {
-  ActivityOptions,
-  ActivityType,
-  Client,
-  Guild,
-  Message,
-} from "discord.js";
+import { ActivityOptions, ActivityType, Client, Message } from "discord.js";
 
 import chalk from "chalk";
 
-import { getEmu } from "./emuChance.js";
 import { environment } from "./environment.js";
 
 const RussianChars = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
@@ -62,72 +55,7 @@ export const slaves: Parameters<typeof buildSlave>[] = [
       name: "Chinoflix",
     },
   ],
-  [
-    "鳳えむ",
-    environment.EMU,
-    new CocoaIntent().useGuild().useGuildMessage(),
-    {
-      type: ActivityType.Streaming,
-      name: "Asahina Senpai, Wonderhoy!",
-      url: "https://www.youtube.com/watch?v=2p1R7btCf_Q&t=32",
-    },
-    async (msg: Message) => {
-      if (msg.author.bot) return;
-
-      // Leak IP
-      if (
-        msg.author.id === environment.EMU_TARGET &&
-        msg.guild?.id === environment.EMU_GUILD &&
-        Math.random() < getEmu() / 100
-      ) {
-        const sticker = await getSticker(msg.guild, environment.EMU_STICKER);
-
-        await msg.reply({
-          stickers: [sticker],
-        });
-      }
-
-      // Skill Issue
-      if (
-        msg.guild?.id === environment.EMU_GUILD &&
-        msg.mentions.has(msg.client.user)
-      ) {
-        if (
-          !msg.content
-            .toLowerCase()
-            .replaceAll(/\s/g, "")
-            .includes("skillissue")
-        )
-          return;
-
-        msg.delete().catch(() => {
-          console.log(
-            chalk.red(`Failed to delete skill issue request message`),
-          );
-        });
-
-        const [reference, sticker] = await Promise.all([
-          msg.fetchReference(),
-          getSticker(msg.guild, environment.SKILLISSUE),
-        ]);
-
-        if (!reference) return;
-
-        await reference.reply({
-          stickers: [sticker],
-        });
-      }
-    },
-  ],
 ];
-
-async function getSticker(guild: Guild, stickerId: string) {
-  const sticker =
-    guild.stickers.cache.get(stickerId) ??
-    (await guild.stickers.fetch(stickerId));
-
-  return sticker;
-}
 
 export const clients = slaves.map((slave) => buildSlave(...slave));
 

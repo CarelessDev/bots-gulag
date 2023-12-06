@@ -1,6 +1,6 @@
 {
   "name": "bots-gulag",
-  "version": "3.2.69",
+  "version": "3.3.0",
   "description": "Bots",
   "repository": "https://github.com/CarelessDev/bots-gulag",
   "type": "module",
@@ -20,10 +20,10 @@
   "devDependencies": {
     "@leomotors/config": "0.11.0",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
-    "@typescript-eslint/eslint-plugin": "6.12.0",
-    "@typescript-eslint/parser": "6.12.0",
-    "eslint": "8.54.0",
-    "eslint-config-prettier": "9.0.0",
+    "@typescript-eslint/eslint-plugin": "6.13.2",
+    "@typescript-eslint/parser": "6.13.2",
+    "eslint": "8.55.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-sort-destructure-keys": "1.5.0",
