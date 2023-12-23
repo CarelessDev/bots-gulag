@@ -1,10 +1,10 @@
-FROM oven/bun as installer
+FROM oven/bun:1.0.15-alpine as installer
 
 COPY package.json bun.lockb ./
 
 RUN bun install --production --frozen-lockfile
 
-FROM oven/bun as runner
+FROM oven/bun:1.0.15-alpine as runner
 
 USER bun
 
