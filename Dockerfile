@@ -1,15 +1,59 @@
-FROM oven/bun:1.0.15-alpine as installer
+# Modified from https://github.com/kaogeek/kaogeek-discord-bot
 
-COPY package.json bun.lockb ./
+# ? -------------------------
+# ? Builder: Complile TypeScript to JS
+# ? -------------------------
 
-RUN bun install --production --frozen-lockfile
+FROM node:20-alpine as builder
 
-FROM oven/bun:1.0.15-alpine as runner
+WORKDIR /app
 
-USER bun
+COPY package.json pnpm-lock.yaml* ./
 
-COPY --chown=bun:bun src ./src
-COPY --chown=bun:bun package.json  ./
-COPY --chown=bun:bun --from=installer /home/bun/app/node_modules ./node_modules
+RUN corepack enable
+RUN pnpm install --frozen-lockfile
 
-CMD ["bun", "run", "start"]
+# copy sources
+COPY src ./src
+COPY tsconfig.json ./
+
+# compile
+RUN pnpm build
+
+# ? -------------------------
+# ? Deps-prod: Obtaining node_modules that contains just production dependencies
+# ? -------------------------
+
+FROM node:20-alpine as deps-prod
+
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml* ./
+
+RUN corepack enable
+RUN pnpm install --frozen-lockfile --prod
+
+# ? -------------------------
+# ? Runner: Production to run
+# ? -------------------------
+
+FROM node:20-alpine as runner
+
+LABEL name "emu-ootori"
+
+RUN corepack enable
+
+USER node
+ENV NODE_ENV production
+ENV ENVIRONMENT PRODUCTION
+
+# copy all files from layers above
+COPY package.json ./
+
+# copy built files
+COPY --chown=node:node --from=deps-prod /app/node_modules ./node_modules
+COPY --chown=node:node --from=builder /app/dist ./dist
+
+RUN pnpm --version
+
+CMD ["pnpm", "start"]

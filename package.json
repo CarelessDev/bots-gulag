@@ -1,15 +1,17 @@
 {
   "name": "bots-gulag",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "description": "Bots",
   "repository": "https://github.com/CarelessDev/bots-gulag",
   "type": "module",
   "private": true,
+  "main": "dist/bot.js",
+  "packageManager": "pnpm@8.13.1",
   "scripts": {
-    "start": "bun run src/bot.ts",
+    "start": "node dist/bot.js",
+    "build": "tsc",
     "format": "eslint . --fix",
-    "lint": "eslint . --max-warnings=0",
-    "check": "tsc --noEmit"
+    "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
     "chalk": "5.3.0",
@@ -20,12 +22,12 @@
   "devDependencies": {
     "@leomotors/config": "0.11.0",
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
-    "@typescript-eslint/eslint-plugin": "6.15.0",
-    "@typescript-eslint/parser": "6.15.0",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prettier": "5.1.1",
+    "eslint-plugin-prettier": "5.1.2",
     "eslint-plugin-sort-destructure-keys": "1.5.0",
     "prettier": "3.1.1",
     "typescript": "5.3.3"
