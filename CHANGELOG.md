@@ -2,6 +2,10 @@
 
 Changelog before version 4 is not available.
 
+## [4.1.1] - 2024-09-22
+
+- fix: riscv64 build
+
 ## [4.1.0] - 2024-09-22
 
 - chore: bump deps

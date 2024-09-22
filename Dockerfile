@@ -44,8 +44,8 @@ LABEL name="bots-gulag"
 RUN corepack enable
 
 USER node
-ENV NODE_ENV production
-ENV ENVIRONMENT PRODUCTION
+ENV NODE_ENV=production
+ENV ENVIRONMENT=PRODUCTION
 
 # copy all files from layers above
 COPY package.json ./
