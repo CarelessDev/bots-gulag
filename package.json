@@ -1,12 +1,12 @@
 {
   "name": "bots-gulag",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Bots",
   "repository": "https://github.com/CarelessDev/bots-gulag",
   "type": "module",
   "private": true,
   "main": "dist/bot.js",
-  "packageManager": "pnpm@8.13.1",
+  "packageManager": "pnpm@9.11.0",
   "scripts": {
     "start": "node dist/bot.js",
     "build": "tsc",
@@ -16,8 +16,8 @@
   "dependencies": {
     "chalk": "5.3.0",
     "cocoa-discord": "3.1.0",
-    "discord.js": "14.14.1",
-    "zod": "3.22.4"
+    "discord.js": "14.16.2",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@leomotors/config": "0.11.0",
