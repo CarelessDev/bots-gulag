@@ -55,6 +55,15 @@ export const slaves: Parameters<typeof buildSlave>[] = [
       name: "Chinoflix",
     },
   ],
+  [
+    "Chicken",
+    environment.CHICKEN,
+    new CocoaIntent(),
+    {
+      type: ActivityType.Playing,
+      name: "เกมเด็กกระโปก",
+    },
+  ],
 ];
 
 export const clients = slaves.map((slave) => buildSlave(...slave));

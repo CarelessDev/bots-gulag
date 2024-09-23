@@ -2,6 +2,10 @@
 
 Changelog before version 4 is not available.
 
+## [4.3.0] - 2024-09-23
+
+- feat: added new bots to always online and do nothing list
+
 ## [4.2.0] - 2024-09-23
 
 - feat: using same image for all architectures
