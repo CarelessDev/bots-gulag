@@ -2,6 +2,10 @@
 
 Changelog before version 4 is not available.
 
+## [4.2.0] - 2024-09-23
+
+- feat: using same image for all architectures
+
 ## [4.1.1] - 2024-09-22
 
 - fix: riscv64 build

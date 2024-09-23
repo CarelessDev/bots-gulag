@@ -4,7 +4,7 @@
 # ? Builder: Complile TypeScript to JS
 # ? -------------------------
 
-FROM node:20-alpine AS builder
+FROM cafe.leomotors.me/riscv64/node-minimal:20-alpine AS builder
 
 WORKDIR /app
 
@@ -24,7 +24,7 @@ RUN pnpm build
 # ? Deps-prod: Obtaining node_modules that contains just production dependencies
 # ? -------------------------
 
-FROM node:20-alpine AS deps-prod
+FROM cafe.leomotors.me/riscv64/node-minimal:20-alpine AS deps-prod
 
 WORKDIR /app
 
@@ -37,7 +37,7 @@ RUN pnpm install --frozen-lockfile --prod
 # ? Runner: Production to run
 # ? -------------------------
 
-FROM node:20-alpine AS runner
+FROM cafe.leomotors.me/riscv64/node-minimal:20-alpine AS runner
 
 LABEL name="bots-gulag"
 

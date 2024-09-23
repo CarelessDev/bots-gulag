@@ -48,18 +48,7 @@ jobs:
           file: Dockerfile
           push: true
           tags: ghcr.io/carelessdev/bots-gulag:${{ github.ref_name }},ghcr.io/carelessdev/bots-gulag:latest
-          platforms: linux/amd64,linux/arm64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Build Docker image (RISC-V)
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile.riscv64
-          push: true
-          tags: ghcr.io/carelessdev/bots-gulag-riscv64:${{ github.ref_name }},ghcr.io/carelessdev/bots-gulag-riscv64:latest
-          platforms: linux/riscv64
+          platforms: linux/amd64,linux/arm64,linux/riscv64
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
